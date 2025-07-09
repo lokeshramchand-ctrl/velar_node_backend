@@ -2,8 +2,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const axios = require('axios');
-
 const app = express();
+const dotenv = require('dotenv');
+dotenv.config();
 app.use(express.json()); // to parse JSON
 
 // Prediction route
@@ -11,7 +12,7 @@ const predictRoute = require('./predict');
 app.use('/api/predict', predictRoute);
 
 // MongoDB connection
-mongoose.connect('mongodb://localhost:27017/chat', {
+mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
