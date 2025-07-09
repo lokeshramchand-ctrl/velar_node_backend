@@ -12,10 +12,8 @@ const predictRoute = require('./predict');
 app.use('/api/predict', predictRoute);
 
 // MongoDB connection
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(process.env.MONGO_URI);
+
 
 // Define schema and model
 const transactionSchema = new mongoose.Schema({
@@ -34,7 +32,7 @@ app.post('/api/transaction/add', async (req, res) => {
     const { description, amount } = req.body;
 
     // Call your AI prediction endpoint
-    const predictRes = await axios.post('https://api.render.com/deploy/srv-d1n539juibrs73e50n7g?key=LXDWOvHrZf4/api/predict', {
+    const predictRes = await axios.post('https://velar-ai-backend.onrender.com/api/predict', {
       description,
     });
 
